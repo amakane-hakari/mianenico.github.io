@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>test on Miane activity</title>
+    <link>https://mianenico.github.io/tags/test/</link>
+    <description>Recent content in test on Miane activity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Wed, 02 Jun 2021 02:33:39 +0900</lastBuildDate><atom:link href="https://mianenico.github.io/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>First</title>
+      <link>https://mianenico.github.io/article/first/</link>
+      <pubDate>Wed, 02 Jun 2021 02:33:39 +0900</pubDate>
+      
+      <guid>https://mianenico.github.io/article/first/</guid>
+      <description>最初の記事 hugoはじめました</description>
+    </item>
+    
+  </channel>
+</rss>
