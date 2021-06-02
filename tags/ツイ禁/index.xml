@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Articles on Miane activity</title>
-    <link>https://mianenico.github.io/article/</link>
-    <description>Recent content in Articles on Miane activity</description>
+    <title>ツイ禁 on Miane activity</title>
+    <link>https://mianenico.github.io/tags/%E3%83%84%E3%82%A4%E7%A6%81/</link>
+    <description>Recent content in ツイ禁 on Miane activity</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 03 Jun 2021 02:43:14 +0900</lastBuildDate><atom:link href="https://mianenico.github.io/article/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Jun 2021 02:43:14 +0900</lastBuildDate><atom:link href="https://mianenico.github.io/tags/%E3%83%84%E3%82%A4%E7%A6%81/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ツイ禁日記1</title>
       <link>https://mianenico.github.io/article/dairy20210602/</link>
@@ -29,15 +29,6 @@ Twitterで潰していた暇をゲームとかに使えばいいのにと思い�
 正直なところ人やプロジェクトの管理をしているのはかなり辛くてコード全く書いていないわけではないのだけれど割り込みの多さに辟易している。客との窓口やるとマジで集中ができない。
 今やりたいことはシステムやアプリケーションコードの改善。ひたすらきれいにしたい。今の請負の仕事ではどんどん汚くなるばかりだし継続的にやっていると汚くし続けているという状況が嫌になってくる。
 割り込みとかなしにプログラミングに集中したいわ……</description>
-    </item>
-    
-    <item>
-      <title>First</title>
-      <link>https://mianenico.github.io/article/first/</link>
-      <pubDate>Wed, 02 Jun 2021 02:33:39 +0900</pubDate>
-      
-      <guid>https://mianenico.github.io/article/first/</guid>
-      <description>最初の記事 hugoはじめました</description>
     </item>
     
   </channel>
