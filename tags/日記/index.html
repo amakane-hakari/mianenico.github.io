@@ -1,25 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="utf-8">
     <title>日記</title>
+    <link rel="stylesheet" href="/main.css">
   </head>
   <body>
     <!-- _default/baseof.html start -->
-    <ul>
-      <li><a href="/">トップ</a></li>
-      <li><a href="/article/">記事</a></li>
-      <li><a href="/tags/">タグ</a></li>
-    </ul>
+    <header>
+      <h1>Miane activity</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="/">トップ</a></li>
+        <li><a href="/article/">記事</a></li>
+        <li><a href="/tags/">タグ</a></li>
+      </ul>
+    </nav>
     <hr />
-    
+    <div class="flex-container">
+      <section class="list">
+        <h2>Recent pages</h2>
+        
+        <h3>2021-06-03</h3>
+        <ul>
+          <li class="pages">
+            <a href="/article/dairy20210603/">ツイ禁日記2</a><br>
+            <span>2021-06-03 21:51:07</span>
+          </li>
+          <li class="pages">
+            <a href="/article/dairy20210602/">ツイ禁日記1</a><br>
+            <span>2021-06-03 02:43:14</span>
+          </li>
+          </ul>
+        
+        <h3>2021-06-02</h3>
+        <ul>
+          <li class="pages">
+            <a href="/article/first/">First</a><br>
+            <span>2021-06-02 02:33:39</span>
+          </li>
+          </ul>
+        </section>
+      <section class="content">
+        
 <!-- _default/taxonomy.html start -->
 
 <ul>
+  <li><a href="/article/dairy20210603/">ツイ禁日記2</a></li>
   <li><a href="/article/dairy20210602/">ツイ禁日記1</a></li>
   </ul>
 <!-- _default/taxonomy.html end -->
 
+      </section>
+    </div>
     <!-- _default/baseof.html end -->
   </body>
 </html>
