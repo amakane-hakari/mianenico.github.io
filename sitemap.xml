@@ -3,10 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://mianenico.github.io/article/</loc>
-    <lastmod>2021-06-03T21:51:07+09:00</lastmod>
+    <lastmod>2021-06-05T03:14:21+09:00</lastmod>
+  </url><url>
+    <loc>https://mianenico.github.io/tags/aws/</loc>
+    <lastmod>2021-06-05T03:14:21+09:00</lastmod>
+  </url><url>
+    <loc>https://mianenico.github.io/article/getting-started-sam-typescript/</loc>
+    <lastmod>2021-06-05T03:14:21+09:00</lastmod>
   </url><url>
     <loc>https://mianenico.github.io/tags/</loc>
-    <lastmod>2021-06-03T21:51:07+09:00</lastmod>
+    <lastmod>2021-06-05T03:14:21+09:00</lastmod>
+  </url><url>
+    <loc>https://mianenico.github.io/tags/typescript/</loc>
+    <lastmod>2021-06-05T03:14:21+09:00</lastmod>
   </url><url>
     <loc>https://mianenico.github.io/tags/%E3%83%84%E3%82%A4%E7%A6%81/</loc>
     <lastmod>2021-06-03T21:51:07+09:00</lastmod>

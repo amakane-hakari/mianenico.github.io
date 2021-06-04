@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>AWS SAM with TypeScript</title>
+    <link rel="stylesheet" href="/main.css">
+  </head>
+  <body>
+    <!-- _default/baseof.html start -->
+    <header>
+      <h1>Miane activity</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="/">トップ</a></li>
+        <li><a href="/article/">記事</a></li>
+        <li><a href="/tags/">タグ</a></li>
+      </ul>
+    </nav>
+    <hr />
+    <div class="flex-container">
+      <section class="list">
+        <h2>Recent pages</h2>
+        
+        <h3>2021-06-05</h3>
+        <ul>
+          <li class="pages">
+            <a href="/article/getting-started-sam-typescript/">AWS SAM with TypeScript</a><br>
+            <span>2021-06-05 03:14:21</span>
+          </li>
+          </ul>
+        
+        <h3>2021-06-03</h3>
+        <ul>
+          <li class="pages">
+            <a href="/article/dairy20210603/">ツイ禁日記2</a><br>
+            <span>2021-06-03 21:51:07</span>
+          </li>
+          <li class="pages">
+            <a href="/article/dairy20210602/">ツイ禁日記1</a><br>
+            <span>2021-06-03 02:43:14</span>
+          </li>
+          </ul>
+        
+        <h3>2021-06-02</h3>
+        <ul>
+          <li class="pages">
+            <a href="/article/first/">First</a><br>
+            <span>2021-06-02 02:33:39</span>
+          </li>
+          </ul>
+        </section>
+      <section class="content">
+        
+<!-- _default/single.html start -->
+<ul>
+  <li><a href="/tags/AWS/">AWS</a></li>
+  <li><a href="/tags/TypeScript/">TypeScript</a></li>
+  </ul>
+<h3 id="いつも調べながらやってわからなくなる">いつも調べながらやってわからなくなる</h3>
+<p>何度か環境作っているのだけど毎回毎回忘れててコピペみたいになって覚えられない。二次情報は正解へ最短距離でたどり着くのだけれど応用の結果なので基礎となる知識が身につかない。きちんとやるならやはり公式ドキュメントをちゃんと見ながらやるべきだと感じたので公式ドキュメントを参考にしながら構築していく。</p>
+<h3 id="sam-cliでnodejsのプロジェクト作成">SAM CLIでnodejsのプロジェクト作成</h3>
+<p><code>sam init</code>でパッと作成する。特に言うことなし。使用したテンプレートは<a href="https://github.com/aws/aws-sam-cli-app-templates/tree/53966a25f123a374b380ca7d2d2d900ef68e2b94/nodejs14.x/cookiecutter-quick-start-from-scratch">Quick Start: From Scratch</a>なので最初の状態はこちらを参照。</p>
+<h3 id="typescriptの設定をする">TypeScriptの設定をする</h3>
+<p>作成されたプロジェクトにpackage.jsonなどがあるのでTypeScriptをインストールする。</p>
+<p>参考:<a href="https://www.typescriptlang.org/download">https://www.typescriptlang.org/download</a></p>
+<pre><code>npm install typescript --save-dev
+</code></pre><p>次にtsconfig.jsonにTypeScriptの設定を書いていく。ベースとなる設定はnpmでインストールできる。今回はnode14のプロジェクトだったので<code>@tsconfig/node14</code>をインストールして使う。</p>
+<p>参考:<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#tsconfig-bases">https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#tsconfig-bases</a></p>
+<pre><code>npm install @tsconfig/node14 --save-dev
+</code></pre><p>肝心のtsconfig.jsonは以下の通り。</p>
+<pre><code>{
+  &quot;extends&quot;: &quot;@tsconfig/node14/tsconfig.json&quot;,
+  &quot;compilerOptions&quot;: {
+    &quot;rootDir&quot;: &quot;src&quot;,
+    &quot;outDir&quot;: &quot;dist&quot;
+  },
+  &quot;include&quot;: [&quot;src/**/*&quot;],
+  &quot;exclude&quot;: [&quot;node_modules&quot;, &quot;**/*.spec.ts&quot;]
+}
+</code></pre><p>参考:<a href="https://www.typescriptlang.org/tsconfig">https://www.typescriptlang.org/tsconfig</a></p>
+<p>それぞれの項目は公式ドキュメントを見ればよい。<code>src</code>ディレクトリ以下にTypeScriptのソースを書いていき<code>dist</code>ディレクトリに出力するよう設定した。</p>
+<p><code>rootDir</code>についてはデフォルトでもどうにかなるが、「暗黙的に入力されたファイルの最長の共通パス」が設定される。SAM CLIでスクラッチ用のテンプレートでプロジェクトを作成するとファイルが1つだけあり、それが<code>src/handlers/hello-from-lambda.js</code>となっていて、この場合に推測されるルートディレクトリが<code>src/handlers</code>になるためこれは想定するルートディレクトリではないので明示的に書いている。</p>
+<p>最終的には<code>src</code>ディレクトリの下にいくつかのディレクトリを作成してそれぞれファイルがある状態になるため想定したルートディレクトリになるはずだが構築中に想定外の状況が発生してしまうので明示的に指定しておいたほうが混乱は少ないと思われる。</p>
+<h3 id="jestをtypescriptに対応させる">jestをTypeScriptに対応させる</h3>
+<p>テストフレームワークであるjestはそのままではTypeScriptでテストコードを書けない。公式ドキュメントによるとBabel経由でサポートするとあるがテストのためだけにいれるくらいならtscを経由したほうがマシと判断。ts-jestへの誘導もあるのでそちらを使う。</p>
+<pre><code>npm install ts-jest @types/jest --save-dev
+npx ts-jest config:init
+</code></pre><p>参考:<a href="https://kulshekhar.github.io/ts-jest/docs/getting-started/installation">https://kulshekhar.github.io/ts-jest/docs/getting-started/installation</a></p>
+<p>設定ファイルについてはts-jestが生成したものそのままで問題なし。</p>
+<p>ここまででTypeScriptで開発を行う環境は整っている。プロジェクト作成時に作られたサンプルのソースをTypeScriptに合わせて変えていく。</p>
+<h3 id="モジュールのimportexportの書き方をtypescriptにあわせる">モジュールのimport/exportの書き方をTypeScriptにあわせる</h3>
+<p>TypeScriptはJavaScriptのスーパーセットなので基本はそのまま動くのだがCommonJSのrequire/exportsについて互換性がない。プロジェクト生成時のソースコードはCommonJSなのでrequire/exportsをimport/exportの書き方に合わせる必要がある。(ここの記述は自信がない)</p>
+<p>まずは本体のソースコードを書き換える。</p>
+<pre><code>/**
+ * A Lambda function that returns a static string
+ */
+- exports.helloFromLambdaHandler = async () =&gt; {
++ const helloFromLambdaHandler = async () =&gt; {
+    // If you change this message, you will need to change hello-from-lambda.test.js
+    const message = 'Hello from Lambda!';
+
+    // All log statements are written to CloudWatch
+    console.info(`${message}`);
+    
+    return message;
+}
+
++ export default {helloFromLambdaHandler};
+</code></pre><p>書き換えた部分はexportsではモジュールとして認識されないので一旦変数として定義。その後<code>export default</code>でexportsと同じ形のオブジェクトになるように変更した。ファイル名も拡張子を<code>.ts</code>に変更しておく。これにあわせてテストコードも変更する。</p>
+<pre><code>- const lambda = require('../../../src/handlers/hello-from-lambda.js');
++ import lambda from '../../../src/handlers/hello-from-lambda';
+</code></pre><p>本体のソースコードの変更がわざわざオブジェクトにしていたのは、テストコード本体に手を加えたくなく<code>lambda.helloFromLambdaHandler</code>の形でアクセスできるようにするため。</p>
+<p>これで<code>npx jest</code>を実行するとテストが実行される。</p>
+<h3 id="templateymlを変更">template.ymlを変更</h3>
+<p>もともとは<code>src</code>ディレクトリにJavaScriptのソースコードがそのままあったが<code>dist</code>ディレクトリにコンパイル結果を出力しているためハンドラの定義をそれにあわせて修正する。</p>
+<h3 id="samでビルド実行">SAMでビルド・実行</h3>
+<p><code>sam build --use-container</code>でビルドして<code>sam local invoke</code>で実行する。これで<code>Hello from lambda!</code>が出力されれば動いている。これでSAM+TypeScriptでの開発環境は整った。</p>
+<h3 id="課題buildspecyml">(課題)buildspec.yml</h3>
+<p>使ったテンプレートに最初から入っていておそらくCodeBuildを使ってLambdaにデプロイするファイルをまとめるもの。中の処理を確認するとテストを実行したあとにテストコードを削除してnpmの開発用モジュールを取り除くという形。TypeScriptならこれに加えてコンパイル後にTypeScriptのソースを削除するようにすればよいと思われるがそのうちCodeBuildも試してみようと思う。</p>
+
+<!-- _default/single.html end -->
+
+      </section>
+    </div>
+    <!-- _default/baseof.html end -->
+  </body>
+</html>

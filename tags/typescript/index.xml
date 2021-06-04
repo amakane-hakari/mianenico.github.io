@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeScript on Miane activity</title>
+    <link>https://mianenico.github.io/tags/typescript/</link>
+    <description>Recent content in TypeScript on Miane activity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 05 Jun 2021 03:14:21 +0900</lastBuildDate><atom:link href="https://mianenico.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS SAM with TypeScript</title>
+      <link>https://mianenico.github.io/article/getting-started-sam-typescript/</link>
+      <pubDate>Sat, 05 Jun 2021 03:14:21 +0900</pubDate>
+      
+      <guid>https://mianenico.github.io/article/getting-started-sam-typescript/</guid>
+      <description>いつも調べながらやってわからなくなる 何度か環境作っているのだけど毎回毎回忘れててコピペみたいになって覚えられない。二次情報は正解へ最短距離でたどり着くのだけれど応用の結果なので基礎となる知識が身につかない。きちんとやるならやはり公式ドキュメントをちゃんと見ながらやるべきだと感じたので公式ドキュメントを参考にしながら構築していく。
+SAM CLIでnodejsのプロジェクト作成 sam initでパッと作成する。特に言うことなし。使用したテンプレートはQuick Start: From Scratchなので最初の状態はこちらを参照。
+TypeScriptの設定をする 作成されたプロジェクトにpackage.jsonなどがあるのでTypeScriptをインストールする。
+参考:https://www.typescriptlang.org/download
+npm install typescript --save-dev 次にtsconfig.jsonにTypeScriptの設定を書いていく。ベースとなる設定はnpmでインストールできる。今回はnode14のプロジェクトだったので@tsconfig/node14をインストールして使う。
+参考:https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#tsconfig-bases
+npm install @tsconfig/node14 --save-dev 肝心のtsconfig.jsonは以下の通り。
+{ &amp;quot;extends&amp;quot;: &amp;quot;@tsconfig/node14/tsconfig.json&amp;quot;, &amp;quot;compilerOptions&amp;quot;: { &amp;quot;rootDir&amp;quot;: &amp;quot;src&amp;quot;, &amp;quot;outDir&amp;quot;: &amp;quot;dist&amp;quot; }, &amp;quot;include&amp;quot;: [&amp;quot;src/**/*&amp;quot;], &amp;quot;exclude&amp;quot;: [&amp;quot;node_modules&amp;quot;, &amp;quot;**/*.spec.ts&amp;quot;] } 参考:https://www.typescriptlang.org/tsconfig
+それぞれの項目は公式ドキュメントを見ればよい。srcディレクトリ以下にTypeScriptのソースを書いていきdistディレクトリに出力するよう設定した。
+rootDirについてはデフォルトでもどうにかなるが、「暗黙的に入力されたファイルの最長の共通パス」が設定される。SAM CLIでスクラッチ用のテンプレートでプロジェクトを作成するとファイルが1つだけあり、それがsrc/handlers/hello-from-lambda.jsとなっていて、この場合に推測されるルートディレクトリがsrc/handlersになるためこれは想定するルートディレクトリではないので明示的に書いている。
+最終的にはsrcディレクトリの下にいくつかのディレクトリを作成してそれぞれファイルがある状態になるため想定したルートディレクトリになるはずだが構築中に想定外の状況が発生してしまうので明示的に指定しておいたほうが混乱は少ないと思われる。
+jestをTypeScriptに対応させる テストフレームワークであるjestはそのままではTypeScriptでテストコードを書けない。公式ドキュメントによるとBabel経由でサポートするとあるがテストのためだけにいれるくらいならtscを経由したほうがマシと判断。ts-jestへの誘導もあるのでそちらを使う。
+npm install ts-jest @types/jest --save-dev npx ts-jest config:init 参考:https://kulshekhar.github.io/ts-jest/docs/getting-started/installation
+設定ファイルについてはts-jestが生成したものそのままで問題なし。
+ここまででTypeScriptで開発を行う環境は整っている。プロジェクト作成時に作られたサンプルのソースをTypeScriptに合わせて変えていく。
+モジュールのimport/exportの書き方をTypeScriptにあわせる TypeScriptはJavaScriptのスーパーセットなので基本はそのまま動くのだがCommonJSのrequire/exportsについて互換性がない。プロジェクト生成時のソースコードはCommonJSなのでrequire/exportsをimport/exportの書き方に合わせる必要がある。(ここの記述は自信がない)
+まずは本体のソースコードを書き換える。
+/** * A Lambda function that returns a static string */ - exports.</description>
+    </item>
+    
+  </channel>
+</rss>

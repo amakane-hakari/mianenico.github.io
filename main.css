@@ -25,3 +25,12 @@ section.content {
 section.list {
   min-width: 300px;
 }
+
+pre {
+  background-color: whitesmoke;
+  padding: 5px;
+}
+
+code {
+  background-color: whitesmoke;
+}
