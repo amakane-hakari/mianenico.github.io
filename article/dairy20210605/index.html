@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ツイ禁日記3</title>
+    <link rel="stylesheet" href="/main.css">
+  </head>
+  <body>
+    <!-- _default/baseof.html start -->
+    <header>
+      <h1>Miane activity</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="/">トップ</a></li>
+        <li><a href="/article/">記事</a></li>
+        <li><a href="/tags/">タグ</a></li>
+      </ul>
+    </nav>
+    <hr />
+    <div class="flex-container">
+      <section class="list">
+        <h2>Recent pages</h2>
+        
+        <h3>2021-06-06</h3>
+        <ul>
+          <li class="pages">
+            <a href="/article/dairy20210605/">ツイ禁日記3</a><br>
+            <span>2021-06-06 02:47:20</span>
+          </li>
+          </ul>
+        
+        <h3>2021-06-05</h3>
+        <ul>
+          <li class="pages">
+            <a href="/article/getting-started-sam-typescript/">AWS SAM with TypeScript</a><br>
+            <span>2021-06-05 03:14:21</span>
+          </li>
+          </ul>
+        
+        <h3>2021-06-03</h3>
+        <ul>
+          <li class="pages">
+            <a href="/article/dairy20210603/">ツイ禁日記2</a><br>
+            <span>2021-06-03 21:51:07</span>
+          </li>
+          <li class="pages">
+            <a href="/article/dairy20210602/">ツイ禁日記1</a><br>
+            <span>2021-06-03 02:43:14</span>
+          </li>
+          </ul>
+        
+        <h3>2021-06-02</h3>
+        <ul>
+          <li class="pages">
+            <a href="/article/first/">First</a><br>
+            <span>2021-06-02 02:33:39</span>
+          </li>
+          </ul>
+        </section>
+      <section class="content">
+        
+<!-- _default/single.html start -->
+<ul>
+  <li><a href="/tags/%e6%97%a5%e8%a8%98/">日記</a></li>
+  <li><a href="/tags/%e3%83%84%e3%82%a4%e7%a6%81/">ツイ禁</a></li>
+  <li><a href="/tags/Rails/">Rails</a></li>
+  </ul>
+<h2>ツイ禁日記3</h2>
+<h3 id="とにかく暇を持て余す">とにかく暇を持て余す</h3>
+<p>Twitterやらないと時間がかなりあるように感じる。どれだけTwitterで無駄にしていたのだろうか。でもその時間を有効活用できてはいない。プログラミングとかしているけどなかなか進まず。やっぱり決断力が不足している感覚がある。</p>
+<h3 id="慣れない言語での開発">慣れない言語での開発</h3>
+<p>もう一つ進まないのはRuby以外でコーディングをしているという点。なにかやろうとするたびに手探りでコードを書いていくことになるのでちょっとしたことをやろうとするだけでも時間がかかる。慣れているRubyでやればいいじゃないかという話ではあるけれど仕事で嫌になるほどコード見ているのもあってそっちはそっちで気が進まない。どちらかというと新しいことをしたいというモチベーションのほうがある。</p>
+<h3 id="アーキテクチャどうする問題">アーキテクチャどうする問題</h3>
+<p>AWSでなにかしようとしたときにとにかくお金がかかる。何が金かかるかってデータベース。とにかくこれだけは如何ともし難い。RDBなら開発中は問題にならないけれどそれ以外は自己投資にしてはちょっと覚悟必要なレベル。</p>
+<p>まあ低コストでやろうとするとMySQLあたり自前で構築するのが無難かな。</p>
+<h3 id="なんのための仕事なのか">なんのための仕事なのか</h3>
+<p>お金稼ぐための仕事なんだけど仕事するために生活の一部を犠牲にしていてその犠牲の結果がコストになっている。やはり労働は悪だと思わざるを得ない。</p>
+<h3 id="railsの設計">Railsの設計</h3>
+<p>どこのソース見てもなんかコントローラーがでかいというかコントローラーにロジック書きすぎなんだよね。コントローラーはほとんど何もしなくていいというかRailsのスタックにあるクラスはコード書かなくても役割持っているからコード書くなと思っているのだけど。</p>
+<p>コントローラーはパラメーターをビジネスロジックに投げつけるだけでいいし、ActiveRecordはビジネスロジックの結果を保存したり取り出したりするだけでいいし、ビューはHTML出力されるだけでいい。</p>
+<p>個人的にはマスタメンテ系のフォーム以外はフォーム用のActiveModelを作成してそこでバリデーションすべきだと思っているし、入力をDBに保存するための加工に関してはActiveRecordに書くべきではなくプレーンオブジェクトとして実装すべきと思っている。要するにRailsのMVCの間に1枚レイヤーが足りていない。</p>
+<p>フォームオブジェクトはparamsを受け取ってインスタンス変数にマッピング、その内容を検証する。検証の結果問題なければサービスオブジェクトに必要なデータを送る。ここもサービスビルダーオブジェクトがあっていい。サービスオブジェクトは入力を処理してDBにActiveRecord経由でアクセスする。ActiveRecordはインフラレイヤーなのでビジネスロジックは書かない。</p>
+<p>Railsのコードがひどくなる理由はアプリケーションサービスとDBテーブルは複雑な多対多の関係を持つのにアプリケーションサービスのロジックをActiveRecordに書くから。あるいはコントローラーをアプリケーションサービスと混合してアプリケーションサービスのロジックをコントローラーに書くから。</p>
+<p>あと何故かappディレクトリの下にservicesディレクトリ作りたがる人多い気がするんだけど、サービスはモデルなんだからmodelsの下にserviceネームスペース作ってそこに入れたほうがいいと思う。フォームもそうなんだけどMでもVでもCでもないコードとかなんのためのMVCだよって話なので。modelsの下をgrepするだけで目的のコードが見つかるのが理想。appから外れてlibの下にコード書くのはもっと最悪。プログラマが書きたいコードはだいたいモデルです。</p>
+
+<!-- _default/single.html end -->
+
+      </section>
+    </div>
+    <!-- _default/baseof.html end -->
+  </body>
+</html>

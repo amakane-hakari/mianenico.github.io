@@ -6,7 +6,26 @@
     <description>Recent content in ツイ禁 on Miane activity</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 03 Jun 2021 21:51:07 +0900</lastBuildDate><atom:link href="https://mianenico.github.io/tags/%E3%83%84%E3%82%A4%E7%A6%81/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Jun 2021 02:47:20 +0900</lastBuildDate><atom:link href="https://mianenico.github.io/tags/%E3%83%84%E3%82%A4%E7%A6%81/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ツイ禁日記3</title>
+      <link>https://mianenico.github.io/article/dairy20210605/</link>
+      <pubDate>Sun, 06 Jun 2021 02:47:20 +0900</pubDate>
+      
+      <guid>https://mianenico.github.io/article/dairy20210605/</guid>
+      <description>とにかく暇を持て余す Twitterやらないと時間がかなりあるように感じる。どれだけTwitterで無駄にしていたのだろうか。でもその時間を有効活用できてはいない。プログラミングとかしているけどなかなか進まず。やっぱり決断力が不足している感覚がある。
+慣れない言語での開発 もう一つ進まないのはRuby以外でコーディングをしているという点。なにかやろうとするたびに手探りでコードを書いていくことになるのでちょっとしたことをやろうとするだけでも時間がかかる。慣れているRubyでやればいいじゃないかという話ではあるけれど仕事で嫌になるほどコード見ているのもあってそっちはそっちで気が進まない。どちらかというと新しいことをしたいというモチベーションのほうがある。
+アーキテクチャどうする問題 AWSでなにかしようとしたときにとにかくお金がかかる。何が金かかるかってデータベース。とにかくこれだけは如何ともし難い。RDBなら開発中は問題にならないけれどそれ以外は自己投資にしてはちょっと覚悟必要なレベル。
+まあ低コストでやろうとするとMySQLあたり自前で構築するのが無難かな。
+なんのための仕事なのか お金稼ぐための仕事なんだけど仕事するために生活の一部を犠牲にしていてその犠牲の結果がコストになっている。やはり労働は悪だと思わざるを得ない。
+Railsの設計 どこのソース見てもなんかコントローラーがでかいというかコントローラーにロジック書きすぎなんだよね。コントローラーはほとんど何もしなくていいというかRailsのスタックにあるクラスはコード書かなくても役割持っているからコード書くなと思っているのだけど。
+コントローラーはパラメーターをビジネスロジックに投げつけるだけでいいし、ActiveRecordはビジネスロジックの結果を保存したり取り出したりするだけでいいし、ビューはHTML出力されるだけでいい。
+個人的にはマスタメンテ系のフォーム以外はフォーム用のActiveModelを作成してそこでバリデーションすべきだと思っているし、入力をDBに保存するための加工に関してはActiveRecordに書くべきではなくプレーンオブジェクトとして実装すべきと思っている。要するにRailsのMVCの間に1枚レイヤーが足りていない。
+フォームオブジェクトはparamsを受け取ってインスタンス変数にマッピング、その内容を検証する。検証の結果問題なければサービスオブジェクトに必要なデータを送る。ここもサービスビルダーオブジェクトがあっていい。サービスオブジェクトは入力を処理してDBにActiveRecord経由でアクセスする。ActiveRecordはインフラレイヤーなのでビジネスロジックは書かない。
+Railsのコードがひどくなる理由はアプリケーションサービスとDBテーブルは複雑な多対多の関係を持つのにアプリケーションサービスのロジックをActiveRecordに書くから。あるいはコントローラーをアプリケーションサービスと混合してアプリケーションサービスのロジックをコントローラーに書くから。
+あと何故かappディレクトリの下にservicesディレクトリ作りたがる人多い気がするんだけど、サービスはモデルなんだからmodelsの下にserviceネームスペース作ってそこに入れたほうがいいと思う。フォームもそうなんだけどMでもVでもCでもないコードとかなんのためのMVCだよって話なので。modelsの下をgrepするだけで目的のコードが見つかるのが理想。appから外れてlibの下にコード書くのはもっと最悪。プログラマが書きたいコードはだいたいモデルです。</description>
+    </item>
+    
     <item>
       <title>ツイ禁日記2</title>
       <link>https://mianenico.github.io/article/dairy20210603/</link>
